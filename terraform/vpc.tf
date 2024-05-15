@@ -1,5 +1,6 @@
 resource "aws_vpc" "atlas-vpc" {
   cidr_block = "192.168.0.0/24"
+  enable_dns_hostnames = true
 
   tags = {
     Name = "atlas-vpc"

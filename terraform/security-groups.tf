@@ -19,8 +19,8 @@ resource "aws_security_group_rule" "sg-ssh" {
   security_group_id = aws_security_group.atlas-sg.id
   type              = "ingress"
   protocol          = "tcp"
-  from_port         = 80
-  to_port           = 80
+  from_port         = 22
+  to_port           = 22
   cidr_blocks       = [aws_vpc.atlas-vpc.cidr_block]
 
 }
@@ -42,5 +42,25 @@ resource "aws_security_group_rule" "sg-nfs" {
   from_port         = 2049
   to_port           = 2049
   cidr_blocks       = [aws_vpc.atlas-vpc.cidr_block]
+
+}
+
+resource "aws_security_group_rule" "sg-all-inbound" {
+  security_group_id = aws_security_group.atlas-sg.id
+  type              = "ingress"
+  protocol          = "all"
+  from_port         = 0
+  to_port           = 65353
+  cidr_blocks       = ["0.0.0.0/0"]
+
+}
+
+resource "aws_security_group_rule" "sg-all-outbound" {
+  security_group_id = aws_security_group.atlas-sg.id
+  type              = "egress"
+  protocol          = "all"
+  from_port         = 0
+  to_port           = 65353
+  cidr_blocks       = ["0.0.0.0/0"]
 
 }
