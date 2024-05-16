@@ -1,5 +1,5 @@
 resource "aws_vpc" "atlas-vpc" {
-  cidr_block = "192.168.0.0/24"
+  cidr_block           = "192.168.0.0/24"
   enable_dns_hostnames = true
 
   tags = {
@@ -28,6 +28,7 @@ resource "aws_subnet" "pub-subnet" {
   vpc_id            = aws_vpc.atlas-vpc.id
   cidr_block        = "192.168.0.0/25"
   availability_zone = "us-east-1b"
+  map_public_ip_on_launch = true
 
   tags = {
     Name = "public-subnet-1"

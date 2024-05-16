@@ -18,3 +18,27 @@ variable "bootstrap-script" {
   default     = "#!/bin/bash"
 
 }
+
+variable "ubuntu_ami" {
+  description = "ami for ubuntu instance"
+  type        = string
+
+}
+
+variable "instance_type" {
+  description = "instance type for ubuntu instance"
+  type        = string
+
+}
+
+variable "key_name" {
+  description = "key pair for ubuntu instance"
+  type        = string
+
+}
+
+variable "availability_zone" {
+  description = "AZ for ubuntu instance"
+  type        = string
+
+}
