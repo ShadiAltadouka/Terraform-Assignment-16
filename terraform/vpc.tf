@@ -25,9 +25,9 @@ resource "aws_nat_gateway" "ngw-1" {
 }
 
 resource "aws_subnet" "pub-subnet" {
-  vpc_id            = aws_vpc.atlas-vpc.id
-  cidr_block        = "192.168.0.0/25"
-  availability_zone = "us-east-1b"
+  vpc_id                  = aws_vpc.atlas-vpc.id
+  cidr_block              = "192.168.0.128/26"
+  availability_zone       = "us-east-1b"
   map_public_ip_on_launch = true
 
   tags = {
@@ -35,10 +35,21 @@ resource "aws_subnet" "pub-subnet" {
   }
 }
 
+resource "aws_subnet" "pub-subnet-2" {
+  vpc_id                  = aws_vpc.atlas-vpc.id
+  cidr_block              = "192.168.0.192/26"
+  availability_zone       = "us-east-1c"
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name = "public-subnet-2"
+  }
+}
+
 resource "aws_subnet" "priv-subnet" {
   vpc_id            = aws_vpc.atlas-vpc.id
-  cidr_block        = "192.168.0.128/25"
-  availability_zone = "us-east-1b"
+  cidr_block        = "192.168.0.64/26"
+  availability_zone = "us-east-1a"
 
   tags = {
     Name = "private-subnet-1"
@@ -61,6 +72,12 @@ resource "aws_route_table" "pub-route-table" {
 
 resource "aws_route_table_association" "pub-route" {
   subnet_id      = aws_subnet.pub-subnet.id
+  route_table_id = aws_route_table.pub-route-table.id
+
+}
+
+resource "aws_route_table_association" "pub-route-2" {
+  subnet_id      = aws_subnet.pub-subnet-2.id
   route_table_id = aws_route_table.pub-route-table.id
 
 }
@@ -94,6 +111,12 @@ resource "aws_main_route_table_association" "priv-rt-main" {
 resource "aws_network_acl_association" "nacl-pub-subnets" {
   network_acl_id = aws_network_acl.atlas-nacl.id
   subnet_id      = aws_subnet.pub-subnet.id
+
+}
+
+resource "aws_network_acl_association" "nacl-pub-subnets-2" {
+  network_acl_id = aws_network_acl.atlas-nacl.id
+  subnet_id      = aws_subnet.pub-subnet-2.id
 
 }
 
