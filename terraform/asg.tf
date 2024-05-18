@@ -85,6 +85,7 @@ resource "aws_lb_listener" "alb-1-listener" {
 
 resource "aws_lb_target_group" "tg-1" {
   name        = "application-target-group-1"
+  load_balancing_algorithm_type = "round_robin"
   target_type = "instance"
   port        = 80
   protocol    = "HTTP"

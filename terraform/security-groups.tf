@@ -9,12 +9,6 @@ resource "aws_security_group" "atlas-sg" {
 
 }
 
-output "aws_security_group" {
-  value       = aws_security_group.atlas-sg.id
-  description = "Security Group ID of atlas-sg"
-
-}
-
 resource "aws_security_group_rule" "sg-ssh" {
   security_group_id = aws_security_group.atlas-sg.id
   type              = "ingress"
