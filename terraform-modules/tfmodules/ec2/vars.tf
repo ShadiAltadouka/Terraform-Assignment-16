@@ -24,3 +24,8 @@ variable "instancename" {
     type = string
   
 }
+
+variable "vpcsg" {
+    description = "vpc security group"
+    type = string
+}
