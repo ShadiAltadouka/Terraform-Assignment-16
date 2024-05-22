@@ -9,7 +9,7 @@ module "ec2" {
     source = "./tfmodules/ec2"
     az = "us-east-1b"
     instancename = module.iam.username
-    vpcsg = module.security-group.sg-name
+    vpcsg = module.security-groups.sg-name
 
     depends_on = [module.iam]
 }
@@ -24,7 +24,7 @@ module "security-group" {
 module "backend" {
     source = "./tfmodules/backend"
     rsa = "aws:kms"
-    version-status = "Enabled"
+    version-status = "Disabled"
     s3-bucket-2 = "shadi-tf-module-bucket"
     dynamodb-name = "dynamo-db-1"
   

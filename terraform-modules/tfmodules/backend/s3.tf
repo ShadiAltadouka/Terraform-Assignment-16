@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "bucket-2" {
   bucket = var.s3-bucket-2
+  force_destroy = true
 
 }
 
