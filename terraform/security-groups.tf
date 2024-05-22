@@ -1,6 +1,6 @@
 resource "aws_security_group" "atlas-sg" {
   name        = "atlas-SG"
-  description = "Allow SSG, HTTPS, and NFS connection."
+  description = "Allow SSH, HTTPS, and NFS connection."
   vpc_id      = aws_vpc.atlas-vpc.id
 
   tags = {
@@ -15,7 +15,7 @@ resource "aws_security_group_rule" "sg-ssh" {
   protocol          = "tcp"
   from_port         = 22
   to_port           = 22
-  cidr_blocks       = [aws_vpc.atlas-vpc.cidr_block]
+  cidr_blocks       = ["0.0.0.0/0"]
 
 }
 
@@ -25,7 +25,7 @@ resource "aws_security_group_rule" "sg-https" {
   protocol          = "tcp"
   from_port         = 443
   to_port           = 443
-  cidr_blocks       = [aws_vpc.atlas-vpc.cidr_block]
+  cidr_blocks       = ["0.0.0.0/0"]
 
 }
 
@@ -35,7 +35,7 @@ resource "aws_security_group_rule" "sg-nfs" {
   protocol          = "tcp"
   from_port         = 2049
   to_port           = 2049
-  cidr_blocks       = [aws_vpc.atlas-vpc.cidr_block]
+  cidr_blocks       = ["0.0.0.0/0"]
 
 }
 
